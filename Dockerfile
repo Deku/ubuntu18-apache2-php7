@@ -8,9 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
-    apache2 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    apache2
 
 RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 
@@ -43,10 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN a2enmod rewrite \
-    && a2enmod curl \
-    && a2enmod gd \
-    && a2enmod mysql
+RUN a2enmod rewrite && service apache2 restart
 
 EXPOSE 80
 EXPOSE 443
