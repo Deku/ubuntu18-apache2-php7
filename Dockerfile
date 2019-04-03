@@ -2,6 +2,10 @@ FROM ubuntu:18.04
 
 LABEL maintainer="José González"
 
+ENV TZ=America/Santiago
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     apache2 \
